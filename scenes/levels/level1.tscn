@@ -399,19 +399,19 @@ position = Vector2(981, -202)
 position = Vector2(991, -202)
 
 [node name="SpikeHurter5" parent="." instance=ExtResource("4_86gnu")]
-position = Vector2(1070, -203)
+position = Vector2(1070, -202)
 
 [node name="SpikeHurter6" parent="." instance=ExtResource("4_86gnu")]
-position = Vector2(1080, -203)
+position = Vector2(1080, -202)
 
 [node name="SpikeHurter7" parent="." instance=ExtResource("4_86gnu")]
-position = Vector2(1090, -203)
+position = Vector2(1090, -202)
 
 [node name="SpikeHurter8" parent="." instance=ExtResource("4_86gnu")]
-position = Vector2(1194, -203)
+position = Vector2(1194, -202)
 
 [node name="SpikeHurter9" parent="." instance=ExtResource("4_86gnu")]
-position = Vector2(1204, -203)
+position = Vector2(1204, -202)
 
 [node name="SpikeHurter10" parent="." instance=ExtResource("4_86gnu")]
 position = Vector2(1306, -218)

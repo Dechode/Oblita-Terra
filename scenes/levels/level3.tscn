@@ -417,5 +417,32 @@ position = Vector2(133, -10)
 [node name="SpikeHurter2" parent="." instance=ExtResource("3_1g14o")]
 position = Vector2(325, -42)
 
+[node name="SpikeHurter3" parent="." instance=ExtResource("3_1g14o")]
+position = Vector2(501, -74)
+
+[node name="SpikeHurter4" parent="." instance=ExtResource("3_1g14o")]
+position = Vector2(722, -106)
+
+[node name="SpikeHurter5" parent="." instance=ExtResource("3_1g14o")]
+position = Vector2(-80, 166)
+
+[node name="SpikeHurter6" parent="." instance=ExtResource("3_1g14o")]
+position = Vector2(-120, 166)
+
+[node name="SpikeHurter7" parent="." instance=ExtResource("3_1g14o")]
+position = Vector2(-152, 166)
+
+[node name="SpikeHurter8" parent="." instance=ExtResource("3_1g14o")]
+position = Vector2(-184, 166)
+
+[node name="SpikeHurter9" parent="." instance=ExtResource("3_1g14o")]
+position = Vector2(-216, 166)
+
+[node name="SpikeHurter10" parent="." instance=ExtResource("3_1g14o")]
+position = Vector2(-234, 167)
+
+[node name="SpikeHurter11" parent="." instance=ExtResource("3_1g14o")]
+position = Vector2(-263, 168)
+
 [node name="WaterHurter" parent="." instance=ExtResource("8_mynue")]
 position = Vector2(1229, 684)
