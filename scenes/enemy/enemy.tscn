@@ -1,8 +1,30 @@
-[gd_scene load_steps=6 format=3 uid="uid://dj28dgdcm73u3"]
+[gd_scene load_steps=9 format=3 uid="uid://dj28dgdcm73u3"]
 
 [ext_resource type="Script" path="res://scenes/enemy/enemy.gd" id="1_mijho"]
-[ext_resource type="SpriteFrames" uid="uid://dkay1jaiyivh5" path="res://resources/snake_enemy_anim.tres" id="2_8do3g"]
+[ext_resource type="Texture2D" uid="uid://b240mrtpthxpe" path="res://assets/forest-assets/characters.png" id="2_dafn4"]
 [ext_resource type="Script" path="res://scenes/weapon/projectile_spawner.gd" id="3_qbmce"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xkvac"]
+atlas = ExtResource("2_dafn4")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82tmd"]
+atlas = ExtResource("2_dafn4")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gsyr7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xkvac")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82tmd")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 5.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qb42n"]
 radius = 7.0
@@ -20,9 +42,10 @@ health = 40
 
 [node name="EnemySprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -16)
-sprite_frames = ExtResource("2_8do3g")
-autoplay = "default"
-frame_progress = 0.0385448
+sprite_frames = SubResource("SpriteFrames_gsyr7")
+animation = &"attack"
+frame = 1
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)

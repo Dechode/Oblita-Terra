@@ -63,7 +63,8 @@ func take_damage(dmg) -> void:
 func attack(p_dir_sign):
 	if not _can_attack:
 		return
-	
+		
+	$EnemySprite.play("attack")
 	projectile_spawner.attack(p_dir_sign)
 	$AttackCooldownTimer.start()
 	_can_attack = false
