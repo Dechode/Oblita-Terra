@@ -1,10 +1,13 @@
-[gd_scene load_steps=22 format=3 uid="uid://cn60718chi3an"]
+[gd_scene load_steps=25 format=3 uid="uid://cn60718chi3an"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_i6q2u"]
 [ext_resource type="Texture2D" uid="uid://b240mrtpthxpe" path="res://assets/forest-assets/characters.png" id="2_5u2e4"]
 [ext_resource type="Texture2D" uid="uid://brir7c25rfjyd" path="res://assets/forest-assets/swoosh.png" id="3_b48cc"]
 [ext_resource type="Script" path="res://scenes/player/gui.gd" id="4_kvo0n"]
 [ext_resource type="Script" path="res://scenes/weapon/projectile_spawner.gd" id="4_q7rks"]
+[ext_resource type="AudioStream" uid="uid://b3stut4tqqcoo" path="res://assets/audio/jump2.ogg" id="6_ivuiv"]
+[ext_resource type="AudioStream" uid="uid://g2tvmkyigl2" path="res://assets/audio/swoosh.ogg" id="7_afgpj"]
+[ext_resource type="AudioStream" uid="uid://c7qa6niip5u4k" path="res://assets/audio/player_death.ogg" id="8_fhtuj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_slxny"]
 atlas = ExtResource("2_5u2e4")
@@ -232,6 +235,15 @@ collision_mask = 3
 position = Vector2(7, 0)
 target_position = Vector2(0, 14)
 collision_mask = 3
+
+[node name="JumpAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ivuiv")
+
+[node name="SwordAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_afgpj")
+
+[node name="DeathAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_fhtuj")
 
 [connection signal="animation_finished" from="SwordSwoosh" to="." method="_on_sword_swoosh_animation_finished"]
 [connection signal="body_entered" from="SwordHitbox" to="." method="_on_sword_hitbox_body_entered"]

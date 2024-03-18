@@ -29,13 +29,13 @@ var start_time := 0
 var level_time_sec := 0.0
 var coins := 0
 
+var _ground_rays := []
+
 var _enemies_in_range := []
 var _level: Level = null
 
 var _finished := false
 var _last_dir_x := 1.0
-
-var ground_rays := []
 
 
 func _ready() -> void:
@@ -48,7 +48,7 @@ func _ready() -> void:
 	
 	for child in $GroundRays.get_children():
 		if child is RayCast2D:
-			ground_rays.append(child)
+			_ground_rays.append(child)
 
 
 func _process(delta: float) -> void:
@@ -78,7 +78,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	grounded = is_on_floor()
 	
-	for ray in ground_rays:
+	for ray in _ground_rays:
 		if ray.is_colliding():
 			grounded = true
 	
@@ -116,7 +116,9 @@ func _physics_process(delta: float) -> void:
 
 
 func jump() -> void:
+	velocity.y = 0.0
 	velocity.y += -jump_force
+	$JumpAudio.play()
 
 
 func attack():
@@ -124,8 +126,10 @@ func attack():
 	if $SwordSwoosh.is_playing():
 		return
 	
-	$SwordSwoosh.play()
 	attacking = true
+	$SwordAudio.play()
+	$SwordSwoosh.play()
+	
 	for enemy in _enemies_in_range:
 		enemy.take_damage(damage)
 
@@ -151,6 +155,7 @@ func take_damage(dmg) -> void:
 
 func _die() -> void:
 	print_debug("Player died")
+	$DeathAudio.play()
 	reset()
 
 
@@ -161,9 +166,10 @@ func reset() -> void:
 	global_position = spawn_point
 	_level.reset_enemies()
 	_finished = false
-	start_time = Time.get_ticks_usec()
 	level_time_sec = 0.0
 	$ProjectileSpawner.reset()
+	
+	start_time = Time.get_ticks_usec()
 	
 	print_debug("Player reset")
 
