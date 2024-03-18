@@ -1,0 +1,151 @@
+[gd_scene load_steps=3 format=3 uid="uid://b17syaup3h3nx"]
+
+[ext_resource type="Script" path="res://scenes/menu/main_menu.gd" id="1_75pou"]
+[ext_resource type="Script" path="res://scenes/menu/level_button.gd" id="2_4ub4x"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_75pou")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="MainMenuButtons" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="PlayButton" type="Button" parent="HBoxContainer/MainMenuButtons"]
+layout_mode = 2
+text = "Play"
+
+[node name="OptionsButton" type="Button" parent="HBoxContainer/MainMenuButtons"]
+layout_mode = 2
+text = "Options"
+
+[node name="CreditsButton" type="Button" parent="HBoxContainer/MainMenuButtons"]
+layout_mode = 2
+text = "Credits"
+
+[node name="QuitButton" type="Button" parent="HBoxContainer/MainMenuButtons"]
+layout_mode = 2
+text = "Quit"
+
+[node name="Levels" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/Levels"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="LevelButtons" type="GridContainer" parent="HBoxContainer/Levels"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 30
+columns = 3
+
+[node name="LevelButton" type="Button" parent="HBoxContainer/Levels/LevelButtons"]
+layout_mode = 2
+text = "Level 1"
+script = ExtResource("2_4ub4x")
+
+[node name="LevelButton2" type="Button" parent="HBoxContainer/Levels/LevelButtons"]
+layout_mode = 2
+text = "Level 2"
+script = ExtResource("2_4ub4x")
+_level_number = 2
+
+[node name="LevelButton3" type="Button" parent="HBoxContainer/Levels/LevelButtons"]
+layout_mode = 2
+text = "Level 3"
+script = ExtResource("2_4ub4x")
+_level_number = 3
+
+[node name="LevelButton4" type="Button" parent="HBoxContainer/Levels/LevelButtons"]
+layout_mode = 2
+text = "Level 4"
+script = ExtResource("2_4ub4x")
+_level_number = 4
+
+[node name="LevelButton5" type="Button" parent="HBoxContainer/Levels/LevelButtons"]
+layout_mode = 2
+text = "Level 5"
+script = ExtResource("2_4ub4x")
+_level_number = 5
+
+[node name="LevelButton6" type="Button" parent="HBoxContainer/Levels/LevelButtons"]
+layout_mode = 2
+text = "Level 6"
+script = ExtResource("2_4ub4x")
+_level_number = 6
+
+[node name="LevelButton7" type="Button" parent="HBoxContainer/Levels/LevelButtons"]
+layout_mode = 2
+text = "Level 7"
+script = ExtResource("2_4ub4x")
+_level_number = 7
+
+[node name="LevelButton8" type="Button" parent="HBoxContainer/Levels/LevelButtons"]
+layout_mode = 2
+text = "Level 8"
+script = ExtResource("2_4ub4x")
+_level_number = 8
+
+[node name="LevelButton9" type="Button" parent="HBoxContainer/Levels/LevelButtons"]
+layout_mode = 2
+text = "Level 9"
+script = ExtResource("2_4ub4x")
+_level_number = 9
+
+[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/Levels"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="StartScreen" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="BestTimeLabel" type="Label" parent="HBoxContainer/StartScreen"]
+layout_mode = 2
+text = "Best Time: "
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="HBoxContainer/StartScreen"]
+layout_mode = 2
+text = "Start"
+
+[node name="CoinsLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "Coins: "
+
+[connection signal="pressed" from="HBoxContainer/MainMenuButtons/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/MainMenuButtons/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="level_selected" from="HBoxContainer/Levels/LevelButtons/LevelButton" to="." method="_on_level_selected"]
+[connection signal="level_selected" from="HBoxContainer/Levels/LevelButtons/LevelButton2" to="." method="_on_level_selected"]
+[connection signal="level_selected" from="HBoxContainer/Levels/LevelButtons/LevelButton3" to="." method="_on_level_selected"]
+[connection signal="level_selected" from="HBoxContainer/Levels/LevelButtons/LevelButton4" to="." method="_on_level_selected"]
+[connection signal="level_selected" from="HBoxContainer/Levels/LevelButtons/LevelButton5" to="." method="_on_level_selected"]
+[connection signal="level_selected" from="HBoxContainer/Levels/LevelButtons/LevelButton6" to="." method="_on_level_selected"]
+[connection signal="level_selected" from="HBoxContainer/Levels/LevelButtons/LevelButton7" to="." method="_on_level_selected"]
+[connection signal="level_selected" from="HBoxContainer/Levels/LevelButtons/LevelButton8" to="." method="_on_level_selected"]
+[connection signal="level_selected" from="HBoxContainer/Levels/LevelButtons/LevelButton9" to="." method="_on_level_selected"]
+[connection signal="pressed" from="HBoxContainer/StartScreen/StartButton" to="." method="_on_start_button_pressed"]

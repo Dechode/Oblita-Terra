@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://6ygiah7tr7xn"]
+
+[ext_resource type="Script" path="res://scenes/weapon/projectile.gd" id="1_uj0kc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g0j3x"]
+radius = 3.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mfa3g"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 7.52
+angle_min = -720.0
+angle_max = 513.3
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -7.41
+radial_accel_max = -5.56
+tangential_accel_min = 10.19
+tangential_accel_max = 13.89
+
+[sub_resource type="Gradient" id="Gradient_px0yc"]
+colors = PackedColorArray(0.0219887, 0.443819, 0.635642, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xxefp"]
+gradient = SubResource("Gradient_px0yc")
+width = 1
+
+[sub_resource type="Gradient" id="Gradient_u8wm8"]
+colors = PackedColorArray(1.20327e-06, 0.479389, 0.433104, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6f0m0"]
+gradient = SubResource("Gradient_u8wm8")
+width = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4tw6e"]
+radius = 4.0
+
+[node name="MagicSpell" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_uj0kc")
+move_speed = 80.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_g0j3x")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 128
+process_material = SubResource("ParticleProcessMaterial_mfa3g")
+texture = SubResource("GradientTexture1D_xxefp")
+local_coords = true
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+amount = 128
+process_material = SubResource("ParticleProcessMaterial_mfa3g")
+texture = SubResource("GradientTexture1D_6f0m0")
+
+[node name="LifeTimeTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="HitArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+shape = SubResource("CircleShape2D_4tw6e")
+
+[connection signal="timeout" from="LifeTimeTimer" to="." method="_on_life_time_timer_timeout"]
+[connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]

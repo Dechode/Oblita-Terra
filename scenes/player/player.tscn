@@ -1,0 +1,238 @@
+[gd_scene load_steps=22 format=3 uid="uid://cn60718chi3an"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_i6q2u"]
+[ext_resource type="Texture2D" uid="uid://b240mrtpthxpe" path="res://assets/forest-assets/characters.png" id="2_5u2e4"]
+[ext_resource type="Texture2D" uid="uid://brir7c25rfjyd" path="res://assets/forest-assets/swoosh.png" id="3_b48cc"]
+[ext_resource type="Script" path="res://scenes/player/gui.gd" id="4_kvo0n"]
+[ext_resource type="Script" path="res://scenes/weapon/projectile_spawner.gd" id="4_q7rks"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_slxny"]
+atlas = ExtResource("2_5u2e4")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4afm"]
+atlas = ExtResource("2_5u2e4")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oh2u6"]
+atlas = ExtResource("2_5u2e4")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eeooj"]
+atlas = ExtResource("2_5u2e4")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xfjix"]
+atlas = ExtResource("2_5u2e4")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8tec5"]
+atlas = ExtResource("2_5u2e4")
+region = Rect2(192, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7otb"]
+atlas = ExtResource("2_5u2e4")
+region = Rect2(224, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7jy1h"]
+atlas = ExtResource("2_5u2e4")
+region = Rect2(256, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ihmun"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_slxny")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4afm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oh2u6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eeooj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xfjix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8tec5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c7otb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7jy1h")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qgwkk"]
+radius = 7.0
+height = 22.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_681ln"]
+atlas = ExtResource("3_b48cc")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_anbue"]
+atlas = ExtResource("3_b48cc")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ccqrx"]
+atlas = ExtResource("3_b48cc")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lecww"]
+atlas = ExtResource("3_b48cc")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cdrm7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_681ln")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_anbue")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ccqrx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lecww")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kpbfq"]
+size = Vector2(18, 28)
+
+[node name="Player" type="CharacterBody2D"]
+y_sort_enabled = true
+texture_filter = 1
+collision_layer = 4
+collision_mask = 11
+script = ExtResource("1_i6q2u")
+jump_force = 300.0
+acceleration = 2.0
+deceleration = 1.5
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_ihmun")
+animation = &"walk"
+autoplay = "idle"
+frame = 5
+frame_progress = 0.958811
+offset = Vector2(0, -6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_qgwkk")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="SwordSwoosh" type="AnimatedSprite2D" parent="."]
+visible = false
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_cdrm7")
+frame = 3
+frame_progress = 1.0
+
+[node name="SwordHitbox" type="Area2D" parent="."]
+position = Vector2(9, 2)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordHitbox"]
+shape = SubResource("RectangleShape2D_kpbfq")
+
+[node name="ProjectileSpawner" type="Node2D" parent="."]
+position = Vector2(18, 0)
+script = ExtResource("4_q7rks")
+projectile_path = "res://scenes/weapon/magic_spell.tscn"
+
+[node name="GUI" type="CanvasLayer" parent="."]
+script = ExtResource("4_kvo0n")
+
+[node name="Control" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Labels" type="HBoxContainer" parent="GUI/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 20
+
+[node name="TimeLabel" type="Label" parent="GUI/Control/Labels"]
+layout_mode = 2
+text = "Time: 0.00"
+
+[node name="CoinsLabel" type="Label" parent="GUI/Control/Labels"]
+layout_mode = 2
+text = "Coins: 0"
+
+[node name="Bars" type="VBoxContainer" parent="GUI/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -84.0
+offset_right = 200.0
+grow_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="HealthBar" type="ProgressBar" parent="GUI/Control/Bars"]
+modulate = Color(0, 1, 0, 1)
+self_modulate = Color(0, 1, 0, 1)
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+value = 100.0
+show_percentage = false
+
+[node name="ManaBar" type="ProgressBar" parent="GUI/Control/Bars"]
+self_modulate = Color(0, 0.301961, 1, 1)
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+value = 100.0
+show_percentage = false
+
+[node name="GroundRays" type="Node2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="GroundRays"]
+target_position = Vector2(0, 14)
+collision_mask = 3
+
+[node name="RayCast2D2" type="RayCast2D" parent="GroundRays"]
+position = Vector2(-7, 0)
+target_position = Vector2(0, 14)
+collision_mask = 3
+
+[node name="RayCast2D3" type="RayCast2D" parent="GroundRays"]
+position = Vector2(7, 0)
+target_position = Vector2(0, 14)
+collision_mask = 3
+
+[connection signal="animation_finished" from="SwordSwoosh" to="." method="_on_sword_swoosh_animation_finished"]
+[connection signal="body_entered" from="SwordHitbox" to="." method="_on_sword_hitbox_body_entered"]
+[connection signal="body_exited" from="SwordHitbox" to="." method="_on_sword_hitbox_body_exited"]

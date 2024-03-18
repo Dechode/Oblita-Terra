@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://dj28dgdcm73u3"]
+
+[ext_resource type="Script" path="res://scenes/enemy/enemy.gd" id="1_mijho"]
+[ext_resource type="SpriteFrames" uid="uid://dkay1jaiyivh5" path="res://resources/snake_enemy_anim.tres" id="2_8do3g"]
+[ext_resource type="Script" path="res://scenes/weapon/projectile_spawner.gd" id="3_qbmce"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qb42n"]
+radius = 7.0
+height = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_13rw7"]
+radius = 85.0059
+
+[node name="Enemy" type="CharacterBody2D"]
+texture_filter = 1
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_mijho")
+health = 40
+
+[node name="EnemySprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+sprite_frames = ExtResource("2_8do3g")
+autoplay = "default"
+frame_progress = 0.0385448
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_qb42n")
+
+[node name="PlayerCheck" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCheck"]
+shape = SubResource("CircleShape2D_13rw7")
+
+[node name="AttackCooldownTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="ProjectileSpawner" type="Node2D" parent="."]
+position = Vector2(11, -8)
+script = ExtResource("3_qbmce")
+projectile_path = "res://scenes/weapon/projectile_weapon.tscn"
+
+[connection signal="body_entered" from="PlayerCheck" to="." method="_on_player_check_body_entered"]
+[connection signal="body_exited" from="PlayerCheck" to="." method="_on_player_check_body_exited"]
+[connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]
