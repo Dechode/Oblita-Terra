@@ -32,6 +32,11 @@ func _ready() -> void:
 	_level_end_menu_instance.hide()
 
 
+func reset_level():
+	reset_enemies()
+	player.reset()
+
+
 func reset_enemies() -> void:
 	for enemy in enemies:
 		enemy.reset()

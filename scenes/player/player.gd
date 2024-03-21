@@ -122,10 +122,10 @@ func jump() -> void:
 
 
 func attack():
-	$SwordSwoosh.show()
-	if $SwordSwoosh.is_playing():
+	if $SwordSwoosh.is_playing() or attacking:
 		return
 	
+	$SwordSwoosh.show()
 	attacking = true
 	$SwordAudio.play()
 	$SwordSwoosh.play()
@@ -156,7 +156,7 @@ func take_damage(dmg) -> void:
 func _die() -> void:
 	print_debug("Player died")
 	$DeathAudio.play()
-	reset()
+	_level.reset_level()
 
 
 func reset() -> void:
@@ -164,7 +164,6 @@ func reset() -> void:
 	mana = max_mana
 	velocity = Vector2.ZERO
 	global_position = spawn_point
-	_level.reset_enemies()
 	_finished = false
 	level_time_sec = 0.0
 	$ProjectileSpawner.reset()
