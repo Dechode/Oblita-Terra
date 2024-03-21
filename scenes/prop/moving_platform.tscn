@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://be7pml2e1nbe8"]
+
+[ext_resource type="Texture2D" uid="uid://c4au1d125bi2i" path="res://assets/lift_platform.png" id="1_3ijen"]
+[ext_resource type="Script" path="res://scenes/prop/moving_platform.gd" id="1_8cci8"]
+
+[node name="MovingPlatform" type="CharacterBody2D"]
+collision_mask = 7
+motion_mode = 1
+platform_on_leave = 2
+script = ExtResource("1_8cci8")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-16, 4, -16, 0, -14, -2, -7, -3, 0, -3, 7, -3, 14, -2, 16, 0, 16, 4, 0, 4)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 3
+texture = ExtResource("1_3ijen")
+offset = Vector2(0, -12)
