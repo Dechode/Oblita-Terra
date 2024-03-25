@@ -2,6 +2,7 @@ class_name Enemy
 extends CharacterBody2D
 
 const PROJECTILE_WEAPON = preload("res://scenes/weapon/projectile_weapon.tscn")
+const COIN = preload("res://scenes/prop/coin.tscn")
 
 enum state {
 	IDLE,
@@ -10,6 +11,7 @@ enum state {
 }
 
 @export var health := 100
+@export var dropped_coins := 2
 
 var _spawn_position := Vector2.ZERO
 var _spawn_health := 100
@@ -75,6 +77,13 @@ func _die() -> void:
 	hide()
 	$CollisionShape2D.set_deferred("disabled", true)
 	_current_state = state.DEAD
+	
+	for i in range(dropped_coins):
+		var _coin = COIN.instantiate()
+		_coin.global_position = self.global_position
+		_coin.global_position.x += 20 * i
+		_coin.global_position.y -= 10
+		get_parent().add_child.call_deferred(_coin)
 
 
 func reset():
