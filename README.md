@@ -4,7 +4,7 @@ Race against your previous times in this small 2d platformer made in Godot 4.
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://github.com/Dechode/Oblita-Terra/blob/main/images/screenshot.jpg)
 
 ## Features
 
